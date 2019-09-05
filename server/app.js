@@ -1,8 +1,26 @@
 const express = require('express'),
-      app = express();
+      path = require('path'),
+      apiRoute = require('./routes/api'),
+      bodyParser = require('body-parser');
 
-app.listen(3000, () => {
-  console.log('Example app listening on port 3000!');
+const app = express(),
+      port = process.env.PORT || 5000,
+      clientPath = path.join(__dirname, '../client/src');
+
+
+app.use(bodyParser.json());
+app.use('/api', apiRoute);
+app.use(express.static(clientPath));
+app.get('*', (req, res) => {
+  res.sendFile(clientPath);
+});
+
+// app.get('/', (req, res) => {
+//   res.render('index')
+// });
+
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 
