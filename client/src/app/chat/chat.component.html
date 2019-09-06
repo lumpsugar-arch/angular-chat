@@ -1,1 +1,15 @@
-<p>chat works!</p>
+<div>
+  chat here
+  <div *ngFor="let message of messages">
+    <span>{{ message.user }}</span>
+    wrote
+    {{ message.msg }}
+  </div>
+</div>
+
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm.value)">
+  <div>
+    <input id="message-input" type="text" formControlName="message">
+    <button>Send message</button>
+  </div>
+</form>

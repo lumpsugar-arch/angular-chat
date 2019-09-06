@@ -1,0 +1,15 @@
+<h1>Login form</h1>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
+  <div>
+    <label for="username">
+      Username
+    </label>
+    <input id="username" type="text" formControlName="username">
+  </div>
+
+  <div>
+    <input type="submit" value="Login to chat">
+  </div>
+</form>
+
