@@ -35,8 +35,8 @@ export class SocketService {
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
-      this.socket.on('message', (data: Message) => {
-        observer.next(data)
+      this.socket.on('message', (data: string) => {
+        observer.next(JSON.parse(data))
       })
     })
   }

@@ -12,7 +12,7 @@ import { Message } from '../models/message'
   styleUrls: ['./chat.component.less']
 })
 export class ChatComponent implements OnInit {
-  user: string;
+  user: User;
   messages: Message[] = [];
   messageContent;
   ioConnection: any;
@@ -31,20 +31,27 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = this.userService.getUser();
+    this.user = JSON.parse(this.userService.getUser());
 
-    console.log(this.messages);
+    console.log(this.user);
+    this.ioConnection = this.socketService.onMessage()
+      .subscribe((message: Message) => {
+        console.log(message);
+        this.messages.push(message)
+      })
   }
 
   onSubmit(messageData) {
     const message = {
-      userId: this.user,
+      userId: this.user.id,
+      userName: this.user.name,
       msg: messageData.message,
       date: new Date().getTime()
     };
 
     console.log(message);
     // this.messages.push(message);
+    console.log(this.messages);
 
     this.messageContent = this.socketService.sendMessage(message)
   }

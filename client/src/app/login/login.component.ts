@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(userData) {
     const loggedTime = new Date().getTime();
+    // const loggedTime = Date.now();
 
     const user = {
       id: `user_${loggedTime}`,

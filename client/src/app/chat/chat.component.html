@@ -1,9 +1,9 @@
 <div>
   chat here
   <div *ngFor="let message of messages">
-    <span>{{ message.user }}</span>
+    <span>{{ message.msg.userName }}</span>
     wrote
-    {{ message.msg }}
+    {{ message.msg.msg }}
   </div>
 </div>
 
