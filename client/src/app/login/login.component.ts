@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 
-import { SocketService } from '../services/socket.service'
-import { UserService } from "../services/user.service";
+import { SocketService } from '../services/socket.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -24,12 +24,11 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group({
       username: ''
-    })
+    });
   }
 
   onSubmit(userData) {
-    const loggedTime = new Date().getTime();
-    // const loggedTime = Date.now();
+    const loggedTime = Date.now();
 
     const user = {
       id: `user_${loggedTime}`,
@@ -38,10 +37,9 @@ export class LoginComponent implements OnInit {
 
     this.user = this.socketService.joinChat(user);
     this.userService.setUser(user);
-    this.router.navigate(['/chat'])
+    this.router.navigate(['/chat']);
   }
 
   ngOnInit() {
   }
-
 }

@@ -1,15 +1,54 @@
-<div>
-  chat here
-  <div *ngFor="let message of messages">
-    <span>{{ message.msg.userName }}</span>
-    wrote
-    {{ message.msg.msg }}
-  </div>
-</div>
+<div class="chat">
 
-<form [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm.value)">
-  <div>
-    <input id="message-input" type="text" formControlName="message">
-    <button>Send message</button>
+  <div class="chat__header">
+    <h1>Angular chat app</h1>
+    <nav class="chat__nav">
+      <ul>
+        <li>
+          <button mat-button (click)="onSignOut()">Sign out</button>
+        </li>
+      </ul>
+    </nav>
   </div>
-</form>
+
+  <div #chatHistory class="chat__history">
+    <div *ngFor="let message of messages">
+      <mat-card class="chat__message message" *ngIf="message.type == 'message'">
+        <div class="message__header">
+          <h3 class="message__author">
+            {{ message.msg.userName }}
+          </h3>
+          <span class="message__date">
+          {{ message.date }}
+        </span>
+        </div>
+        <p class="message__text">
+          {{ message.msg.msg }}
+        </p>
+      </mat-card>
+
+      <div class="chat__notification" *ngIf="message.type == 'user'">
+        <span>{{ message.msg.name }} has joined the chat!</span>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="messageForm" class="chat__form" [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm.value)">
+    <div class="chat__form-field">
+      <mat-form-field class="chat__form-input" >
+        <textarea
+          #inputMessage
+          matInput
+          matTextareaAutosize
+          placeholder="Type your message here..."
+          maxlength="140"
+          formControlName="message"
+          (keyup.enter)="onSubmit(messageForm.value)">
+        </textarea>
+        <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
+      </mat-form-field>
+
+      <button class="chat__form-submit" mat-raised-button color="primary">Send</button>
+    </div>
+  </form>
+</div>
