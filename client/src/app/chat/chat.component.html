@@ -13,10 +13,13 @@
 
   <div #chatHistory class="chat__history">
     <div *ngFor="let message of messages">
-      <mat-card
-        class="chat__message message"
-        *ngIf="message.type == 'message'"
-        [class.message--self]="user.id == message.msg.userId">
+      <div
+        class="message-container"
+        [class.message-container--self]="user.id == message.msg.userId">
+        <mat-card
+          class="chat__message message"
+          *ngIf="message.type == 'message'"
+          [class.message--self]="user.id == message.msg.userId">
 
           <div class="message__header">
             <h3 class="message__author">
@@ -29,19 +32,16 @@
           <p class="message__text">
             {{ message.msg.msg }}
           </p>
-      </mat-card>
+        </mat-card>
 
-      <div *ngIf="message.msg.userAvatar">
-        <img
-          class="message__avatar"
-          src="{{ message.msg.userAvatar }}"
-          alt="{{ message.msg.userName }}'s avatar"
-          [class.message__avatar--self]="user.id == message.msg.userId">
+        <div *ngIf="message.msg.userAvatar">
+          <img
+            class="message__avatar"
+            src="{{ message.msg.userAvatar }}"
+            alt="{{ message.msg.userName }}'s avatar"
+            [class.message__avatar--self]="user.id == message.msg.userId">
+        </div>
       </div>
-
-<!--        <div *ngIf="!message.msg.userAvatar">-->
-<!--          <img src="https://avatars.dicebear.com/v2/male/:seed.svg" alt="">-->
-<!--        </div>-->
 
       <div class="chat__notification" *ngIf="message.type == 'user'">
         <span>{{ message.msg.name }} has joined the chat!</span>

@@ -20,7 +20,7 @@
     overflow-y: auto;
     display: flex;
     flex-flow: column nowrap;
-    padding-bottom: 2rem;
+    padding: 0 1rem 2rem;
 
     & > :first-child {
       margin-top: auto !important;
@@ -54,6 +54,16 @@
   }
 }
 
+.message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  &--self {
+    align-items: flex-end;
+  }
+}
+
 .message {
   border-radius: .5rem;
   background: @color-blue;
@@ -61,6 +71,9 @@
   color: @color-white;
   position: relative;
   margin: .5rem 2rem .5rem 0;
+  max-width: 60%;
+  float: left;
+  min-width: 5rem;
 
   &::after {
     content: '';
@@ -99,6 +112,7 @@
   &--self {
     background: @color-purple;
     margin: .5rem 0 .5rem 2rem;
+    float: right;
 
     &::after {
       border-top-color: @color-purple;
