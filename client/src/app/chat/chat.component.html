@@ -40,16 +40,16 @@
 
   <form [formGroup]="messageForm" class="chat__form" (ngSubmit)="onSubmit(messageForm.value)">
     <div class="chat__form-field">
+<!--      {{isTyping}}-->
       <mat-form-field class="chat__form-input" >
-        <textarea
+        <input
           #inputMessage
           matInput
-          matTextareaAutosize
           placeholder="Type your message here..."
           maxlength="140"
           formControlName="message"
           (keyup.enter)="onSubmit(messageForm.value)">
-        </textarea>
+<!--          (keyup)="onKey($event)">-->
         <mat-hint align="end">{{inputMessage.value.length}}/140</mat-hint>
       </mat-form-field>
 

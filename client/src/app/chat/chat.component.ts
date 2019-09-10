@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   messageContent: string;
   ioConnection: any;
   messageForm: FormGroup;
+  isTyping: any;
 
   @ViewChild('chatHistory', { static: false }) chatHistory: ElementRef;
 
@@ -54,7 +55,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit(messageData): void {
-    if (!messageData.message) {
+    console.log(messageData);
+    if (!messageData.message || messageData.message.length === 0) {
       return;
     }
     const message = {
@@ -84,5 +86,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   onSignOut(): void {
     this.userService.removeUser();
     this.router.navigate(['/login']);
+  }
+
+  onKey(event: KeyboardEvent) {
+    // console.log(event);
+    // this.isTyping = true;
+    // setTimeout(() => {
+    //   this.isTyping = false;
+    // }, 2000);
   }
 }
