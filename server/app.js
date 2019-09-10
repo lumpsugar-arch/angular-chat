@@ -35,7 +35,6 @@ io.on('connection', socket => {
   });
 
   socket.on('join', msg => {
-    console.log('joined');
     const data = JSON.parse(msg);
     users.push(data);
     client.publish('pubsub', JSON.stringify({
@@ -45,7 +44,6 @@ io.on('connection', socket => {
   });
 
   socket.on('message', msg => {
-    console.log('send message');
     const data = JSON.parse(msg);
     messages.push(data);
     client.publish('pubsub', JSON.stringify({

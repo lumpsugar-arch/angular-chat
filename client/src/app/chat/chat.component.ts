@@ -41,8 +41,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       this.router.navigate(['/login']);
     }
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((message: Message) => {
-        message.date = this.getTime(message.msg.date);
+      .subscribe((message: any) => {
+        if (message.msg.date) {
+          message.date = this.getTime(+message.msg.date);
+        }
         this.messages.push(message);
       });
   }
@@ -59,7 +61,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       userId: this.user.id,
       userName: this.user.name,
       msg: messageData.message,
-      date: Date.now()
+      date: Date.now().toString()
     };
 
     this.socketService.sendMessage(message);
