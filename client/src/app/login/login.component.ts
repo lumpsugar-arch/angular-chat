@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { SocketService } from '../services/socket.service';
 import { UserService } from '../services/user.service';
 
+const AVATAR_URL = 'https://avatars.dicebear.com/v2/male/';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -32,7 +34,8 @@ export class LoginComponent implements OnInit {
 
     const user = {
       id: `user_${loggedTime}`,
-      name: userData.username
+      name: userData.username,
+      avatarUrl: `${AVATAR_URL}${this.getRandomSeed()}.svg`
     };
 
     this.user = this.socketService.joinChat(user);
@@ -41,5 +44,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  private getRandomSeed(): number {
+    return Math.random() * 1000;
   }
 }

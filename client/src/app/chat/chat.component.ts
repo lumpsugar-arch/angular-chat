@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   messageContent: string;
   ioConnection: any;
   messageForm: FormGroup;
-  isTyping: any;
+  // isTyping: any;
 
   @ViewChild('chatHistory', { static: false }) chatHistory: ElementRef;
 
@@ -55,7 +55,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit(messageData): void {
-    console.log(messageData);
     if (!messageData.message || messageData.message.length === 0) {
       return;
     }
@@ -63,11 +62,13 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       userId: this.user.id,
       userName: this.user.name,
       msg: messageData.message,
-      date: Date.now().toString()
+      date: Date.now().toString(),
+      userAvatar: this.user.avatarUrl
     };
 
     this.socketService.sendMessage(message);
     this.messageForm.reset();
+    console.log(message);
   }
 
   getTime(date) {
