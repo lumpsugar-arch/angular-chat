@@ -4,11 +4,11 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
-  MatCardModule
+  MatCardModule,
+  MatSidenavModule,
+  MatListModule,
+  MatIconModule
 } from '@angular/material';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatIconModule
   ],
   exports: [
     MatFormFieldModule,
@@ -28,7 +28,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatCardModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatIconModule
   ],
   declarations: [],
   providers: []

@@ -1,0 +1,10 @@
+<div *ngIf="users.length > 0">
+  <mat-list class="users-list" *ngFor="let user of users">
+    <mat-list-item class="users-list__item">
+      <mat-icon mat-list-icon><img src="{{ user.msg.avatarUrl }}" alt="{{ user.msg.name }}'s avatar"></mat-icon>
+      <h4 mat-line>{{ user.msg.name }}</h4>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+

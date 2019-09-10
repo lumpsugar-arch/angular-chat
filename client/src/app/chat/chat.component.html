@@ -1,16 +1,4 @@
 <div class="chat">
-
-  <div class="chat__header">
-    <h1>Angular chat app</h1>
-    <nav class="chat__nav">
-      <ul>
-        <li>
-          <button mat-button (click)="onSignOut()">Sign out</button>
-        </li>
-      </ul>
-    </nav>
-  </div>
-
   <div #chatHistory class="chat__history">
     <div *ngFor="let message of messages">
       <div

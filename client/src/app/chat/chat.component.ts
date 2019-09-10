@@ -84,11 +84,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     } catch (err) { }
   }
 
-  onSignOut(): void {
-    this.userService.removeUser();
-    this.router.navigate(['/login']);
-  }
-
   onKey(event: KeyboardEvent) {
     // console.log(event);
     // this.isTyping = true;
