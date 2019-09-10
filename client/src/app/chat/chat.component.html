@@ -13,18 +13,23 @@
 
   <div #chatHistory class="chat__history">
     <div *ngFor="let message of messages">
-      <mat-card class="chat__message message" *ngIf="message.type == 'message'">
-        <div class="message__header">
-          <h3 class="message__author">
-            {{ message.msg.userName }}
-          </h3>
-          <span class="message__date">
-          {{ message.date }}
-        </span>
-        </div>
-        <p class="message__text">
-          {{ message.msg.msg }}
-        </p>
+      <mat-card
+        class="chat__message message"
+        *ngIf="message.type == 'message'"
+        [class.message--self]="user.id == message.msg.userId">
+
+          <div class="message__header">
+            <h3 class="message__author">
+              {{ message.msg.userName }}
+            </h3>
+            <span class="message__date">
+              {{ message.date }}
+            </span>
+          </div>
+          <p class="message__text">
+            {{ message.msg.msg }}
+          </p>
+
       </mat-card>
 
       <div class="chat__notification" *ngIf="message.type == 'user'">
