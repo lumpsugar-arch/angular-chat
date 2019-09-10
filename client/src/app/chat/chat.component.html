@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <form [formGroup]="messageForm" class="chat__form" [formGroup]="messageForm" (ngSubmit)="onSubmit(messageForm.value)">
+  <form [formGroup]="messageForm" class="chat__form" (ngSubmit)="onSubmit(messageForm.value)">
     <div class="chat__form-field">
       <mat-form-field class="chat__form-input" >
         <textarea

@@ -83,6 +83,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   onSignOut(): void {
     this.userService.removeUser();
-    this.router.navigateByUrl('/login');
+    this.router.navigate(['/login']);
   }
 }

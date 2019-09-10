@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {observable, Observable, Observer} from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../models/user';
 import { Message } from '../models/message';
 
@@ -13,7 +13,6 @@ export class SocketService {
 
   constructor(
   ) {
-    console.log('SOCKET', this.socket);
     if (!this.socket) {
       this.socket = socketIo(SERVER_URL);
     }
