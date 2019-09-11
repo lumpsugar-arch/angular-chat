@@ -7,8 +7,6 @@ const server = http.createServer(app);
 const io = socket(server);
 const client = redis.createClient();
 
-const apiRoute = require('./routes/api');
-
 let users = [],
     messages = [];
 
@@ -19,8 +17,6 @@ app.use(function (req, res, next) {
 });
 
 app.use(bodyParser.json());
-
-app.use('/api', apiRoute);
 
 server.listen(3000, () => {
   console.log('listening on 3000');

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {User} from '../models/user';
 
@@ -18,9 +18,10 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((user: any) => {
-        this.users.push(user);
+      .subscribe((msg: any) => {
+        if (msg.type === 'user') {
+          this.users.push(msg);
+        }
       });
   }
-
 }

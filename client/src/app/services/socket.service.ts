@@ -37,10 +37,4 @@ export class SocketService {
       });
     });
   }
-
-  public onEvent(event: Event): Observable<any> {
-    return new Observable<Event>(observer => {
-      this.socket.on(event, () => observer.next());
-    });
-  }
 }

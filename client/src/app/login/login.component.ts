@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { User } from '../models/user';
+
 import { SocketService } from '../services/socket.service';
 import { UserService } from '../services/user.service';
 
@@ -13,7 +15,7 @@ const AVATAR_URL = 'https://avatars.dicebear.com/v2/male/';
   styleUrls: ['./login.component.less']
 })
 export class LoginComponent implements OnInit {
-  user;
+  user: User;
   loginForm;
 
   constructor(
@@ -22,14 +24,12 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router
   ) {
-    this.user = '';
-
     this.loginForm = this.formBuilder.group({
       username: ''
     });
   }
 
-  onSubmit(userData) {
+  onSubmit(userData): void {
     const loggedTime = Date.now();
 
     const user = {
@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
       avatarUrl: `${AVATAR_URL}${this.getRandomSeed()}.svg`
     };
 
-    this.user = this.socketService.joinChat(user);
     this.userService.setUser(user);
+    this.socketService.joinChat(user);
     this.router.navigate(['/chat']);
   }
 
