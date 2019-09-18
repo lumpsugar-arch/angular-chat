@@ -30,6 +30,14 @@ export class SocketService {
     this.socket.emit('message', messageData);
   }
 
+  public changeUsername(oldUser: User, newUser: User): void {
+    const data = {
+      oldUser,
+      newUser
+    };
+    this.socket.emit('changeUsername', data);
+  }
+
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
       this.socket.on('message', (data: string) => {

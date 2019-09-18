@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersListComponent } from './users-list/users-list.component';
 import { MenuComponent } from './menu/menu.component';
+import { UserDialogComponent } from './user-dialog/user-dialog.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MenuComponent } from './menu/menu.component';
     ChatComponent,
     LoginComponent,
     UsersListComponent,
-    MenuComponent
+    MenuComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,9 @@ import { MenuComponent } from './menu/menu.component';
   providers: [
     SocketService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    UserDialogComponent
+  ]
 })
 export class AppModule { }

@@ -1,4 +1,7 @@
 <div class="chat">
+  <button class="user-button" mat-fab (click)="openUserDialog()">
+    <mat-icon>person</mat-icon>
+  </button>
   <div #chatHistory class="chat__history">
     <div *ngFor="let message of messages">
       <div
@@ -31,8 +34,14 @@
         </div>
       </div>
 
-      <div class="chat__notification" *ngIf="message.type == 'user'">
+      <div class="chat__notification"
+           *ngIf="message.type == 'user'">
         <span>{{ message.msg.name }} has joined the chat!</span>
+      </div>
+
+      <div class="chat__notification"
+           *ngIf="message.type == 'changeName'">
+        <span>{{ message.msg.oldUser.name }} in now {{ message.msg.newUser.name }}!</span>
       </div>
     </div>
   </div>

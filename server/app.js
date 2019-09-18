@@ -46,5 +46,12 @@ io.on('connection', socket => {
       type: 'message',
       msg: data
     }))
+  });
+
+  socket.on('changeUsername', msg => {
+    client.publish('pubsub', JSON.stringify({
+      type: 'changeName',
+      msg: msg
+    }))
   })
 });

@@ -18,9 +18,16 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.ioConnection = this.socketService.onMessage()
-      .subscribe((msg: any) => {
-        if (msg.type === 'user') {
-          this.users.push(msg);
+      .subscribe((message: any) => {
+        if (message.type === 'user') {
+          this.users.push(message.msg);
+        }
+        if (message.type === 'changeName') {
+          this.users.forEach((user, index, array) => {
+            if (user.name === message.msg.oldUser.name) {
+              array[index].name = message.msg.newUser.name;
+            }
+          });
         }
       });
   }

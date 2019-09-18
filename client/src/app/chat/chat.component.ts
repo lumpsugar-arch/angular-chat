@@ -1,11 +1,15 @@
 import {Component, OnInit, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
 
 import {SocketService} from '../services/socket.service';
 import {UserService} from '../services/user.service';
 import {User} from '../models/user';
 import {Message} from '../models/message';
+
+import {UserDialogComponent} from '../user-dialog/user-dialog.component';
 
 @Component({
   selector: 'app-chat',
@@ -14,10 +18,12 @@ import {Message} from '../models/message';
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
   user: User;
+  oldUser: User;
   messages: Message[] = [];
   messageContent: string;
   ioConnection: any;
   messageForm: FormGroup;
+  dialogRef: MatDialogRef<UserDialogComponent> | null;
   // isTyping: any;
 
   @ViewChild('chatHistory', { static: false }) chatHistory: ElementRef;
@@ -26,7 +32,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     private socketService: SocketService,
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog
   ) {
     this.messageContent = '';
 
@@ -45,6 +52,11 @@ export class ChatComponent implements OnInit, AfterViewChecked {
       .subscribe((message: any) => {
         if (message.msg.date) {
           message.date = this.getTime(+message.msg.date);
+        }
+
+        if (message.type === 'changeName') {
+          this.user = message.msg.newUser;
+          this.oldUser = message.msg.oldUser;
         }
         this.messages.push(message);
       });
@@ -68,7 +80,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
     this.socketService.sendMessage(message);
     this.messageForm.reset();
-    console.log(message);
   }
 
   getTime(date) {
@@ -82,6 +93,14 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     try {
       this.chatHistory.nativeElement.scrollTop = this.chatHistory.nativeElement.scrollHeight;
     } catch (err) { }
+  }
+
+  openUserDialog(): void {
+    const dialogRef = this.dialog.open(UserDialogComponent, {
+      data: {
+        name: this.user.name
+      }
+    });
   }
 
   onKey(event: KeyboardEvent) {
