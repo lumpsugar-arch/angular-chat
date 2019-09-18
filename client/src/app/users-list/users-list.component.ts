@@ -20,7 +20,7 @@ export class UsersListComponent implements OnInit {
     this.ioConnection = this.socketService.onMessage()
       .subscribe((message: any) => {
         if (message.type === 'user') {
-          this.users.push(message.msg);
+          this.users = message.msg.users;
         }
         if (message.type === 'changeName') {
           this.users.forEach((user, index, array) => {
@@ -28,6 +28,9 @@ export class UsersListComponent implements OnInit {
               array[index].name = message.msg.newUser.name;
             }
           });
+        }
+        if (message.type === 'leave') {
+          this.users = message.msg.users;
         }
       });
   }

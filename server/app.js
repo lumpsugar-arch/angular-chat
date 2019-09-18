@@ -31,8 +31,12 @@ io.on('connection', socket => {
   });
 
   socket.on('join', msg => {
-    const data = JSON.parse(msg);
-    users.push(data);
+    const userData = JSON.parse(msg);
+    users.push(userData);
+    const data = {
+      userData,
+      users
+    };
     client.publish('pubsub', JSON.stringify({
       type: 'user',
       msg: data
@@ -52,6 +56,19 @@ io.on('connection', socket => {
     client.publish('pubsub', JSON.stringify({
       type: 'changeName',
       msg: msg
+    }))
+  });
+
+  socket.on('leave', msg => {
+    const userData = JSON.parse(msg);
+    users = users.filter(user => user.id !== userData['id']);
+    const data = {
+      userData,
+      users
+    };
+    client.publish('pubsub', JSON.stringify({
+      type: 'leave',
+      msg: data
     }))
   })
 });

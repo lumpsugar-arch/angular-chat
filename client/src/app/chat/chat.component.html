@@ -36,7 +36,12 @@
 
       <div class="chat__notification"
            *ngIf="message.type == 'user'">
-        <span>{{ message.msg.name }} has joined the chat!</span>
+        <span>{{ message.msg.userData.name }} has joined the chat!</span>
+      </div>
+
+      <div class="chat__notification"
+           *ngIf="message.type == 'leave'">
+        <span>{{ message.msg.userData.name }} has left the chat!</span>
       </div>
 
       <div class="chat__notification"

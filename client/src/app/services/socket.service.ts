@@ -37,6 +37,9 @@ export class SocketService {
     };
     this.socket.emit('changeUsername', data);
   }
+  public leaveChat(user: string): void {
+    this.socket.emit('leave', user);
+  }
 
   public onMessage(): Observable<Message> {
     return new Observable<Message>(observer => {
